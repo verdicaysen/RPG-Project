@@ -17,6 +17,6 @@ public class Mover : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        GetComponent<NavMeshAgent>().destination = target.position - GetComponent<NavMeshAgent>().transform.position;
+        GetComponent<NavMeshAgent>().destination = target.position;
     }
 }
