@@ -7,24 +7,19 @@ public class Mover : MonoBehaviour
 {
 
    [SerializeField] Transform target;
-   
-  
-    void Start()
-    {
-        
-    }
 
+    
     void Update()
     {
         if(Input.GetMouseButtonDown(0))
         {
-           MoveToPoint();
+            MoveToCursor();
         }
       
          
     }
 
-    private void MoveToPoint()
+    private void MoveToCursor()
     {
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         RaycastHit hit;
@@ -33,6 +28,9 @@ public class Mover : MonoBehaviour
         {
             GetComponent<NavMeshAgent>().destination = hit.point;
         }
+             
     }
+
+   
  
 }
