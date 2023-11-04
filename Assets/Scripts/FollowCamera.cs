@@ -2,20 +2,23 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class FollowCamera : MonoBehaviour
+namespace RPG.Core
 {
-    [SerializeField] Transform target;
-
-    Vector3 difference;
-
-    void Start()
+    public class FollowCamera : MonoBehaviour
     {
-        difference = transform.position - target.position;
-    }
+        [SerializeField] Transform target;
 
-    void Update()
-    {
-        transform.position = target.position + difference;
-    }
+        Vector3 difference;
 
+        void Start()
+        {
+            difference = transform.position - target.position;
+        }
+
+        void LateUpdate()
+        {
+            transform.position = target.position + difference;
+        }
+
+    }
 }
