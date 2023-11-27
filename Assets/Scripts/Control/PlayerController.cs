@@ -18,7 +18,11 @@ namespace RPG.Control
 
         private void InteractCombat()
         {
-            throw new NotImplementedException();
+            RaycastHit[] hits = Physics.RaycastAll(GetMouseRay());
+            foreach (RaycastHit hit in hits)
+            {
+                
+            }
         }
 
         private void InteractMovement()
@@ -31,7 +35,7 @@ namespace RPG.Control
 
         private void MoveToCursor()
         {
-            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            Ray ray = GetMouseRay();
             RaycastHit hit;
             bool hasHit = Physics.Raycast(ray, out hit);
             if (hasHit)
@@ -39,6 +43,11 @@ namespace RPG.Control
                 GetComponent<Mover>().MoveTo(hit.point);
             }
 
+        }
+
+        private static Ray GetMouseRay()
+        {
+            return Camera.main.ScreenPointToRay(Input.mousePosition);
         }
     }
 
