@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 namespace RPG.Combat
@@ -7,7 +8,7 @@ namespace RPG.Combat
     {
         public void Attack(CombatTarget target)
         {
-            print("Attacking.");
+            print("Attacking.");                       
         }
     }
 }
