@@ -3,6 +3,7 @@ using RPG.Movement;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.InteropServices.WindowsRuntime;
 using UnityEngine;
 
 namespace RPG.Control
@@ -13,11 +14,12 @@ namespace RPG.Control
 
         private void Update()
         {
-            InteractCombat();
-            InteractMovement();
+            if (InteractCombat()) return;
+            if (InteractMovement()) return;
+            print ("Nothing to do.");
         }
 
-        private void InteractCombat()
+        private bool InteractCombat()
         {
             RaycastHit[] hits = Physics.RaycastAll(GetMouseRay());
             foreach (RaycastHit hit in hits)
@@ -29,27 +31,25 @@ namespace RPG.Control
                 {
                     GetComponent<Fighter>().Attack(target);
                 }
+                return true;
             }
+            return false;
         }
 
-        private void InteractMovement()
-        {
-            if (Input.GetMouseButton(0))
-            {
-                MoveToCursor();
-            }
-        }
-
-        private void MoveToCursor()
+        private bool InteractMovement()
         {
             Ray ray = GetMouseRay();
             RaycastHit hit;
             bool hasHit = Physics.Raycast(ray, out hit);
             if (hasHit)
             {
-                GetComponent<Mover>().MoveTo(hit.point);
+                if (Input.GetMouseButton(0))
+                {
+                    GetComponent<Mover>().MoveTo(hit.point);
+                }
+                return true;
             }
-
+            return false;
         }
 
         private static Ray GetMouseRay()
