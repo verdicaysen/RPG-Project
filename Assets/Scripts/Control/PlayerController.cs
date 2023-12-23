@@ -38,14 +38,14 @@ namespace RPG.Control
 
         private bool InteractMovement()
         {
-            Ray ray = GetMouseRay();
+            //Ray ray = GetMouseRay();
             RaycastHit hit;
-            bool hasHit = Physics.Raycast(ray, out hit);
+            bool hasHit = Physics.Raycast(GetMouseRay(), out hit);
             if (hasHit)
             {
                 if (Input.GetMouseButton(0))
                 {
-                    GetComponent<Mover>().MoveTo(hit.point);
+                    GetComponent<Mover>().StartMoveAction(hit.point);
                 }
                 return true;
             }
